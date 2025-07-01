@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode }) => {
   return {
     root: '.',
-    base: './',
+    base: '/story-app-dicoding-rev2/',
     publicDir: resolve(__dirname, 'public'),
     build: {
       // Default Vite outDir is 'dist' relative to project root
@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
         },
         injectManifest: {
           swSrc: resolve(__dirname, 'sw.js'),
-          swDest: './dist/sw.js',
+          swDest: 'sw.js',
         },
         manifest: {
           id: '/story-app-pwa/',

@@ -4,7 +4,7 @@ import { NetworkFirst, CacheFirst, StaleWhileRevalidate } from 'workbox-strategi
 import { ExpirationPlugin } from 'workbox-expiration'; // Hanya satu kali
 
 // Precache semua aset yang di-generate oleh injectManifest
-precacheAndRoute(self.__WB_MANIFEST || []);
+precacheAndRoute([{"revision":null,"url":"assets/index-W--3J05i.js"},{"revision":null,"url":"assets/index-xZvNr3dy.css"},{"revision":"ecbf68b8dd7f290db8b745fcf197fb7c","url":"index.html"},{"revision":"91a0c96bd3ed9489073ee7a8c7cf3c25","url":"registerSW.js"},{"revision":"1ceae012af34509c8d699ed0668a3ddf","url":"sw.js"},{"revision":"dd1c0b86151fa0f295380e6582a66f8f","url":"images/logo-dicoding-story-app-144x144.png"},{"revision":"46780c53f9aed32b1e210f5659afe354","url":"images/logo-dicoding-story-app-196x196.png"},{"revision":"4e18c2218a5b5f6e3ba46c1af6e7138c","url":"images/logo-dicoding-story-app-48x48.png"},{"revision":"d360fdb12b722626fd6a35e05f4074ba","url":"manifest.webmanifest"}] || []);
 
 // VAPID Public Key Anda
 const VAPID_PUBLIC_KEY = 'BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk'; //
@@ -21,8 +21,6 @@ const rawData = self.atob(base64); // Ganti window.atob dengan self.atob  const 
   }
   return outputArray; //
 }
-
-// console.log('Precached files:', self.__WB_MANIFEST); // Hapus/komentar baris ini untuk menghindari duplikasi self.__WB_MANIFEST
 
 // Event listener untuk push notification
 self.addEventListener('push', (event) => {
