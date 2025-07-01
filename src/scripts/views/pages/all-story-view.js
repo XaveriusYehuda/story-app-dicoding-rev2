@@ -255,6 +255,12 @@ class AllStoryView {
     const notificationModel = new NotificationModel(); // Inisialisasi sebagai instance
     const bookmarkModel = new BookmarkModel(); // Inisialisasi sebagai instance
 
+    // Sembunyikan tombol Unsubscribe saat pertama kali render
+    const { unsubscribeBtn } = this.getElements();
+    if (unsubscribeBtn) {
+      unsubscribeBtn.style.display = 'none';
+    }
+
     await initDatabase().catch(err => {
       console.error('Failed to initialize database:', err);
     });

@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode }) => {
   return {
     root: '.',
-    base: '/story-app-pwa/',
+    base: './',
     publicDir: resolve(__dirname, 'public'),
     build: {
       // Default Vite outDir is 'dist' relative to project root
@@ -20,7 +20,9 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       VitePWA({
-        strategy: 'injectManifest',
+        strategies: "injectManifest",
+        srcDir: ".", // karena sw.js ada langsung di src/
+        filename: "sw.js", // nama file service worker kamu
         registerType: 'autoUpdate',
         injectRegister: 'auto',
         devOptions: {

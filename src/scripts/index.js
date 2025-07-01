@@ -12,19 +12,13 @@ import App from './views/app'; // Ini adalah "View" utama Anda atau Router View
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+
   const app = new App({
     content: document.querySelector('#main-content'),
   });
 
-  // Logika inisialisasi notifikasi tidak lagi di sini secara langsung.
-  // NotificationPresenter akan diinisialisasi di dalam View yang relevan (misalnya AllStoryView)
-  // dan di-inject melalui constructor AllStoryPresenter.
-  // const notificationModel = new NotificationModel();
-  // const notificationPresenter = new NotificationPresenter({
-  //   view: app, // Jika App adalah View global untuk Notifikasi
-  //   notificationModel: notificationModel,
-  // });
-  // await notificationPresenter.initializeNotifications(); // Ini akan dipicu oleh Presenter lain
+  // Daftarkan Service Worker dan setup notifikasi push
+  await setupPushNotification();
 
   await app.renderPage(); // Render halaman utama
 
@@ -33,3 +27,37 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
 });
+// Fungsi untuk setup push notification dan service worker
+async function setupPushNotification() {
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+    console.warn('Push notification tidak didukung.');
+    return;
+  }
+
+  try {
+    const registration = await navigator.serviceWorker.register('/sw.js');
+    console.log('Service Worker terdaftar:', registration);
+
+    const permission = await Notification.requestPermission();
+    if (permission !== 'granted') {
+      console.warn('Izin notifikasi tidak diberikan');
+      return;
+    }
+
+    const isSubscribed = await isCurrentPushSubscriptionAvailable(registration);
+    console.log(`Status subscription: ${isSubscribed ? 'SUDAH' : 'BELUM'} terdaftar`);
+    // Tambahkan logika subscribe jika belum terdaftar, dsb.
+  } catch (error) {
+    console.error('Gagal setup push notification:', error);
+  }
+}
+
+// Dummy function, ganti dengan implementasi cek subscription yang sesuai
+async function isCurrentPushSubscriptionAvailable(registration) {
+  try {
+    const subscription = await registration.pushManager.getSubscription();
+    return !!subscription;
+  } catch (e) {
+    return false;
+  }
+}

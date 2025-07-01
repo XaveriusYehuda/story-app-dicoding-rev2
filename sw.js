@@ -22,7 +22,7 @@ const rawData = self.atob(base64); // Ganti window.atob dengan self.atob  const 
   return outputArray; //
 }
 
-console.log('Precached files:', self.__WB_MANIFEST);
+// console.log('Precached files:', self.__WB_MANIFEST); // Hapus/komentar baris ini untuk menghindari duplikasi self.__WB_MANIFEST
 
 // Event listener untuk push notification
 self.addEventListener('push', (event) => {
@@ -129,7 +129,10 @@ registerRoute(
 
 // Caching khusus gambar dari API story (misal: https://story-api.dicoding.dev/v1/xxx.jpg)
 registerRoute(
-  ({ url }) => url.origin === 'https://story-api.dicoding.dev' && url.pathname.match(/\.(jpg|jpeg|png|webp|gif)$/i),
+  ({ url }) => 
+    url.origin === 'https://story-api.dicoding.dev' &&
+    url.pathname.startsWith('/v1/stories/') &&
+    url.pathname.match(/\.(jpg|jpeg|png|webp|gif)$/i),
   new CacheFirst({
     cacheName: 'story-api-images-cache',
     plugins: [
@@ -141,10 +144,11 @@ registerRoute(
   })
 );
 
+
 // Caching untuk aset gambar statis aplikasi (icon, badge, dsb)
 registerRoute(
-  ({ request, url }) => request.destination === 'image' && url.origin !== 'https://story-api.dicoding.dev',
-  new CacheFirst({
+  ({ request, url }) => request.destination === 'image',
+  new StaleWhileRevalidate({
     cacheName: 'app-images-cache',
     plugins: [
       new ExpirationPlugin({
@@ -156,18 +160,18 @@ registerRoute(
 );
 
 // Caching API untuk detail cerita menggunakan StaleWhileRevalidate
-registerRoute(
-  ({ url }) => url.href.startsWith('https://story-api.dicoding.dev/v1/stories/'), // Perhatikan trailing slash untuk detail
-  new CacheFirst({
-    cacheName: 'story-detail-api-cache', // Nama cache baru untuk detail cerita
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 20, // Jumlah maksimum detail cerita yang akan disimpan
-        maxAgeSeconds: 7 * 24 * 60 * 60, // Data detail cerita bisa disimpan lebih lama, misalnya 7 hari
-      }),
-    ],
-  })
-);
+// registerRoute(
+//   ({ url }) => url.href.startsWith('https://story-api.dicoding.dev/v1/stories/'), // Perhatikan trailing slash untuk detail
+//   new CacheFirst({
+//     cacheName: 'story-detail-api-cache', // Nama cache baru untuk detail cerita
+//     plugins: [
+//       new ExpirationPlugin({
+//         maxEntries: 20, // Jumlah maksimum detail cerita yang akan disimpan
+//         maxAgeSeconds: 7 * 24 * 60 * 60, // Data detail cerita bisa disimpan lebih lama, misalnya 7 hari
+//       }),
+//     ],
+//   })
+// );
 
 registerRoute(
   ({ url }) => url.href.startsWith('https://{s}.tile.openstreetmap.org/'), // Perluas URL agar mencakup semua tile
