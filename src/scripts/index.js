@@ -35,7 +35,7 @@ async function setupPushNotification() {
   }
 
   try {
-    const registration = await navigator.serviceWorker.register('/sw.js');
+    const registration = await navigator.serviceWorker.register('/story-app-dicoding-rev2/sw.js');
     console.log('Service Worker terdaftar:', registration);
 
     const permission = await Notification.requestPermission();

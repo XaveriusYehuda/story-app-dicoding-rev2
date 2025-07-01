@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
         },
         injectManifest: {
           swSrc: resolve(__dirname, 'sw.js'),
-          swDest: 'sw.js',
+          swDest: 'dist/sw.js', // swDest harus berbeda dengan swSrc agar injectManifest berjalan
         },
         manifest: {
           id: '/story-app-pwa/',
