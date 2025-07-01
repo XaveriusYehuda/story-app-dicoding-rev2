@@ -1,0 +1,214 @@
+/* Base styles remain the same */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+  color: #555;
+  margin-top: 1rem;
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+#story-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+#bookmark-story-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+#tambahBtn {
+  display: block;
+  margin: 4rem auto 0 auto;
+  max-width: 300px;
+  width: 100%;
+  padding: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+#tambahBtn:hover {
+  background-color: #45a049;
+}
+
+#bookmarkPageBtn {
+  display: block;
+  margin: 1rem auto 0 auto;
+  max-width: 300px;
+  width: 100%;
+  padding: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+#bookmarkPageBtn:hover {
+  background-color: #45a049;
+}
+
+#bookmarkBtn {
+  display: block;
+  margin: 4rem auto 0 auto;
+  max-width: 300px;
+  width: 100%;
+  padding: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+#bookmarkBtn:hover {
+  background-color: #45a049;
+}
+
+#subscribeBtn {
+  max-width: 250px;
+  width: auto;
+  background-color: white;
+  color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin-right: 35px;
+}
+
+#subscribeBtn:active {
+  background-color: #e6f5ea;
+  color: #388e3c;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.15) inset;
+  transform: translateY(2px);
+  transition: none; */
+}
+
+#unsubscribeBtn {
+  max-width: 150px;
+  width: 150px;
+  background-color: white;
+  color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin-right: 35px;
+}
+
+#unsubscribeBtn:active {
+  background-color: #e6f5ea;
+  color: #388e3c;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.15) inset;
+  transform: translateY(2px);
+  transition: none; */
+}
+
+.story {
+  background: white;
+  padding: 1rem;
+  width: auto;
+  justify-self: center;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  contain: layout; /* Helps with view transitions */
+}
+.story img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.story h3 {
+  margin: 0.5rem 0 0.2rem;
+}
+.story p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Container styling for centering and neat layout */
+#container {
+  width: 90vw;
+  margin: 40px auto 0 auto;
+  padding: 24px 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+
+/* Styles for Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100px; /* Sembunyikan di luar layar */
+  left: 0;
+  background-color: #007bff; /* Warna latar belakang */
+  color: white;
+  padding: 8px 12px;
+  z-index: 1000; /* Pastikan di atas elemen lain */
+  text-decoration: none;
+  border-radius: 0 0 4px 4px; /* Sudut bawah melengkung */
+  transition: top 0.3s ease-in-out; /* Animasi saat muncul */
+}
+
+.skip-link:focus {
+  top: 10px; /* Tampilkan saat difokuskan */
+  left: 10px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Fallback for browsers without View Transitions support */
+@supports not (view-transition-name: none) {
+  .story {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .story:hover {
+    transform: translateY(-5px);
+  }
+}
